@@ -1,0 +1,25 @@
+# Attributes: width, height, background-color, font, font-color, font-size, coords 
+#
+# width:              defines the width of the window, excepts an integer 
+#
+# height:             defines the height of the window, excepts an integer
+#
+# background-color:   defines the background color of the window, the color is given as a html-hexcode   
+#
+# font:               defines the font of the text
+#
+# font-color:         defines the font color, the color is given as a html-hexcode
+#
+# font-size:          defines the size of the font, given as an integer
+#
+# coords:             defines the spawn coordinates of the window
+#                     can either be two integers seperated by a space or one of the following terms:
+#                     top-left, top-right, bottom-left, bottom-right
+
+width=400
+height=150
+background-color=ffffff
+font=Arial
+font-size=12
+font-color=aaaaaa
+coords=950 20
