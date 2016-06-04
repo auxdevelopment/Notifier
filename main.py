@@ -113,6 +113,28 @@ def getCoords():
 
 
 """
+function:   getFont()
+@desc:      return the font defined in the config file
+"""
+def getFont():
+    font = getAttribute("font")
+    if(re.match("font=[a-zA-Z_-]+")):
+        return font.split("=")[1]
+    raise ValueError("font: invalid value")
+
+
+"""
+function:   getFontSize()
+@desc:      returns the font size defined in the config file
+"""
+def getFontSize():
+    font_size = getAttribute("font-size")
+    if(re.match("font-size=[0-9]+")):
+        return font_size.split("=")[1]
+    raise ValueError("font-size: invalid value")
+
+
+"""
 function:   getBackgroundColor()
 @desc:      returns background-color attribute
 """
@@ -147,7 +169,7 @@ def sendMessage(msg, duration):
     canvas.pack()
     
     canvas.create_rectangle((0,0,getWidth(), getHeight()), fill="#" + getBackgroundColor())
-    canvas.create_text((getWidth() // 2, getHeight() // 2), text=msg, fill="#" + getFontColor())
+    canvas.create_text((getWidth() // 2, getHeight() // 2), text=msg, fill="#" + getFontColor(), font=(getFont(), getFontSize()))
     
     window.overrideredirect(1) 
     window.after(duration, lambda: window.destroy())
