@@ -118,7 +118,7 @@ function:   getFont()
 """
 def getFont():
     font = getAttribute("font")
-    if(re.match("font=[a-zA-Z_-]+")):
+    if(re.match("font=[a-zA-Z_-]+", font)):
         return font.split("=")[1]
     raise ValueError("font: invalid value")
 
@@ -129,7 +129,7 @@ function:   getFontSize()
 """
 def getFontSize():
     font_size = getAttribute("font-size")
-    if(re.match("font-size=[0-9]+")):
+    if(re.match("font-size=[0-9]+", font_size)):
         return font_size.split("=")[1]
     raise ValueError("font-size: invalid value")
 
