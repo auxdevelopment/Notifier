@@ -76,7 +76,7 @@ def getWidth():
     width = getAttribute("width")
     if(re.match("width=[0-9]+", width)):
         return int(width.split("=")[1])
-    raise ValueError("Invalid value for attribute \"width\"")
+    raise ValueError("width: invalid value")
 
 
 """
@@ -87,7 +87,7 @@ def getHeight():
     height = getAttribute("height")
     if(re.match("height=[0-9]+", height)):
         return int(height.split("=")[1])
-    raise ValueError("Invalid value for attribute \"height\"")
+    raise ValueError("height: invalid value")
 
 """
 function:   getCoords()
@@ -109,6 +109,29 @@ def getCoords():
 
         coords = coords.split(" ")
         return (int(coords[0]), int(coords[1]))
+    raise ValueError("coords: invalid value")
+
+
+"""
+function:   getBackgroundColor()
+@desc:      returns background-color attribute
+"""
+def getBackgroundColor():
+    background_color = getAttribute("background-color")
+    if(re.match("background-color=[0-9a-fA-F]{3,6}", background_color)):
+        return background_color.split("=")[1]
+    raise ValueError("background-color: invalid value")
+
+
+"""
+function:   getFontColor()
+@desc:      returns font-color attribute
+"""
+def getFontColor():
+    font_color = getAttribute("font-color")
+    if(re.match("font-color=[0-9a-fA-F]{3,6}", font_color)):
+        return font_color.split("=")[1]
+    raise ValueError("font-color: invalid value")
 
 
 """
@@ -120,7 +143,11 @@ function:   sendMessage(msg, duration)
 """
 def sendMessage(msg, duration):
     window = Tk()
-    label = Label(window, text=msg, compound=CENTER)
+    canvas = Canvas(window, width=getWidth(), height=getHeight())
+    canvas.pack()
+    
+    canvas.create_rectangle((0,0,getWidth(), getHeight()), fill="#" + getBackgroundColor())
+    canvas.create_text((getWidth() // 2, getHeight() // 2), text=msg, fill="#" + getFontColor())
     
     window.overrideredirect(1) 
     window.after(duration, lambda: window.destroy())
@@ -128,7 +155,6 @@ def sendMessage(msg, duration):
     window.resizable(width=False,height=False)
     window.geometry('%dx%d+%d+%d' % (getWidth(), getHeight(), getCoords()[0], getCoords()[1]))
     
-    label.pack()
     
     window.mainloop()
 
